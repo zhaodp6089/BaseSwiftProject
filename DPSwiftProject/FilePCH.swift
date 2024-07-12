@@ -34,7 +34,7 @@ var isFullScreen: Bool {
     return false
 }
 
-let safeA = UIApplication.shared.windows.filter({$0.isKeyWindow}).last?.safeAreaInsets
+let safeInsets = UIApplication.shared.windows.filter({$0.isKeyWindow}).last?.safeAreaInsets
 var safeArea: UIEdgeInsets {
     guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).last else {
         return .zero
