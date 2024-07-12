@@ -1,0 +1,35 @@
+# Xcode
+#
+ 
+# 忽略所有.DS_Store文件
+*.DS_Store
+ 
+# 忽略所有的Xcode构建文件
+DerivedData
+ 
+# 忽略Xcode的缓存文件
+*.hmap
+*.ipa
+ 
+# 忽略Xcode的日志文件和设备信息文件
+*.xcuserstate
+*.xcscmblueprint
+ 
+# 忽略模拟器文件
+*.mode1v
+*.mode2v
+*.modev
+ 
+# 忽略Xcode的playground文件
+*.playground
+ 
+# 忽略Xcode的swift包管理器的缓存
+Packages
+ 
+# 忽略用于Xcode项目的文件
+project.xcworkspace
+xcuserdata
+UserInterfaceState.xcuserstate
+ 
+# 忽略其他自动生成的文件
+build/
