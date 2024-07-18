@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGI-Mc-Xbb">
-                                <rect key="frame" x="87" y="103" width="240" height="20"/>
+                                <rect key="frame" x="87" y="107" width="240" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="De9-fH-PJT">
                                         <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
@@ -96,6 +96,68 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="37.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xFR-md-Y2h">
+            <objects>
+                <viewController storyboardIdentifier="otherV" id="pXS-bv-9EK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ReZ-cI-eg8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05h-bf-ZjM">
+                                <rect key="frame" x="87" y="107" width="240" height="20"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwy-jl-F0F">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
+                                        <color key="backgroundColor" red="0.8980392157" green="0.1843137255" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="55" id="JJW-Wu-HjD"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scoreLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="7uY-6c-4Qg">
+                                        <rect key="frame" x="47" y="0.0" width="15" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Jpb-cq-pJR"/>
+                                            <constraint firstAttribute="width" secondItem="7uY-6c-4Qg" secondAttribute="height" multiplier="114:150" id="fHr-Jz-FDB"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.60392156860000001" green="0.44705882349999998" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="0cQ-T9-gKx"/>
+                                    <constraint firstItem="wwy-jl-F0F" firstAttribute="centerY" secondItem="05h-bf-ZjM" secondAttribute="centerY" id="I8X-nL-Zth"/>
+                                    <constraint firstItem="7uY-6c-4Qg" firstAttribute="centerY" secondItem="05h-bf-ZjM" secondAttribute="centerY" id="L52-aI-VSv"/>
+                                    <constraint firstItem="wwy-jl-F0F" firstAttribute="height" secondItem="05h-bf-ZjM" secondAttribute="height" id="Om3-pB-Vjy"/>
+                                    <constraint firstItem="wwy-jl-F0F" firstAttribute="leading" secondItem="05h-bf-ZjM" secondAttribute="leading" id="XQY-uK-pRB"/>
+                                    <constraint firstItem="7uY-6c-4Qg" firstAttribute="leading" secondItem="wwy-jl-F0F" secondAttribute="trailing" constant="-8" id="e7J-gy-wlu"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                        <color key="value" red="0.98823529409999999" green="0.1137254902" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fkT-cn-tY0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="05h-bf-ZjM" firstAttribute="centerX" secondItem="fkT-cn-tY0" secondAttribute="centerX" id="2R8-NA-5VJ"/>
+                            <constraint firstItem="05h-bf-ZjM" firstAttribute="top" secondItem="fkT-cn-tY0" secondAttribute="top" constant="59" id="CaH-rY-Gkh"/>
+                            <constraint firstItem="05h-bf-ZjM" firstAttribute="width" secondItem="ReZ-cI-eg8" secondAttribute="width" multiplier="0.57971" id="T04-fo-hFp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H6S-Wv-fwz" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-520" y="38"/>
         </scene>
     </scenes>
     <resources>

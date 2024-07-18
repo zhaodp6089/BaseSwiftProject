@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00BAF5A42C48B4250060B257 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BAF5A32C48B4240060B257 /* SceneDelegate.swift */; };
 		55DB369AA35FDA2E59063471 /* Pods_DPSwiftProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9AB1FB309C201AE6808903 /* Pods_DPSwiftProject.framework */; };
 		634A837A25A557E30059F986 /* MyProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 634A837825A557E30059F986 /* MyProfile.storyboard */; };
 		634A837B25A557E30059F986 /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A837925A557E30059F986 /* MyProfile.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00BAF5A32C48B4240060B257 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		10075F225F01012FC9BE2448 /* Pods-DPSwiftProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DPSwiftProject.release.xcconfig"; path = "Target Support Files/Pods-DPSwiftProject/Pods-DPSwiftProject.release.xcconfig"; sourceTree = "<group>"; };
 		2A9AB1FB309C201AE6808903 /* Pods_DPSwiftProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DPSwiftProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D0AD3362EBF92B0C99619B /* Pods-DPSwiftProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DPSwiftProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-DPSwiftProjectTests/Pods-DPSwiftProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				634A838225A55D550059F986 /* NetWork */,
 				6387F1E72591A49F00E33A55 /* Classes */,
 				6387F1B72591A49100E33A55 /* AppDelegate.swift */,
+				00BAF5A32C48B4240060B257 /* SceneDelegate.swift */,
 				6387F1BB2591A49100E33A55 /* ViewController.swift */,
 				63C22CC025933B430046D3C0 /* scoreLine.png */,
 				6387F1BD2591A49100E33A55 /* Main.storyboard */,
@@ -563,6 +566,7 @@
 			files = (
 				63D72067259B17E80089B1D9 /* MainTabbarVC.swift in Sources */,
 				634A838425A55DC20059F986 /* BaseNetWork.swift in Sources */,
+				00BAF5A42C48B4250060B257 /* SceneDelegate.swift in Sources */,
 				634A837F25A559430059F986 /* FilePCH.swift in Sources */,
 				634A837B25A557E30059F986 /* MyProfile.swift in Sources */,
 				6387F1BC2591A49100E33A55 /* ViewController.swift in Sources */,

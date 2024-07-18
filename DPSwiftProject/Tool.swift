@@ -13,6 +13,42 @@ import Hue
 import CommonCrypto
 
 
+func makeKeyWindow(scene : NSObject?) {
+    if #available(iOS 13.0, *) {
+        if let sc = scene as? UIWindowScene {
+            rtWindow = UIWindow(windowScene: sc)
+        }
+    } else {
+        // Fallback on earlier versions
+        rtWindow = UIWindow.init(frame: UIScreen.main.bounds)
+    }
+    rtWindow?.backgroundColor = UIColor.white;
+    rtWindow?.rootViewController = UITabBarController.customIrregularityStyle(delegate: nil)
+    rtWindow?.makeKeyAndVisible()
+}
+
+var rtWindow: UIWindow?
+
+//var dpWindow: UIWindow {
+//    if let window: UIWindow = (UIApplication.shared.delegate?.window)! {
+//        return window
+//    } else {
+//        if #available(iOS 13.0, *) {
+//            let arr: Set = UIApplication.shared.connectedScenes
+//            let windowScene: UIWindowScene = arr.first as! UIWindowScene
+//        //如果是普通APP开发，可以使用
+//        // SceneDelegate * delegate = (SceneDelegate *)windowScene.delegate;
+//           //UIWindow * mainWindow = delegate.window;
+//         if let mainWindow: UIWindow = windowScene.value(forKeyPath: "delegate.window") as? UIWindow {
+//                return mainWindow
+//            } else {
+//                return UIApplication.shared.windows.first!
+//            }
+//        }else{
+//            return UIApplication.shared.keyWindow!
+//        }
+//    }
+//}
 
 extension String {
     var md5:String {
@@ -44,17 +80,18 @@ extension UIStoryboard {
         return vc
     }
     
-    class func storyBdWithID(storyName:String, nameID:String) -> UIViewController? {
-        
-        let vc = UIStoryboard.init(name: storyName, bundle: Bundle.main).instantiateViewController(withIdentifier: nameID)
-        return vc
+    class func stBdWithID(storyName:String, nameID:String?) -> UIViewController {
+        guard let _ = nameID?.isEmpty else {
+            return UIStoryboard.init(name: storyName, bundle: Bundle.main).instantiateInitialViewController() ?? UIViewController()
+        }
+        return UIStoryboard.init(name: storyName, bundle: Bundle.main).instantiateViewController(withIdentifier: nameID!)
     }
     
 }
 
 extension UIViewController {
     
-    class func currentTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    class func currentTopViewController(base: UIViewController? = rtWindow?.rootViewController) -> UIViewController? {
         
         if let nav = base as? UINavigationController {
             return currentTopViewController(base: nav.visibleViewController)
@@ -68,23 +105,22 @@ extension UIViewController {
         return base
     }
     
-    class func alertMessage(style:UIAlertController.Style, title:String, message:String, options:[String], cancel:String?) -> Void {
+    class func alertMessage(style:UIAlertController.Style, title:String, message:String, options:[String], cancel:String?, targetVC:UIViewController?) -> Void {
         
-        let currentVc = UIViewController.currentTopViewController()
+        let currentVc = targetVC ?? UIViewController.currentTopViewController()
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: style)
         for str in options {
             alertVC.addAction(UIAlertAction(title: str, style: UIAlertAction.Style.default, handler: { (action) in
                 
             }))
         }
-        alertVC.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: { (action) in
+        alertVC.addAction(UIAlertAction(title: cancel ?? "取消", style: UIAlertAction.Style.cancel, handler: { (action) in
             
         }))
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             alertVC.popoverPresentationController?.sourceRect = currentVc?.view.bounds ?? CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
             alertVC.popoverPresentationController?.sourceView = currentVc?.view
-            alertVC.popoverPresentationController?.permittedArrowDirections = .down
         }
         
         currentVc?.present(alertVC, animated: true, completion: nil)
@@ -103,33 +139,13 @@ extension UIColor {
 
 extension UITabBarController {
     class func customIrregularityStyle(delegate: UITabBarControllerDelegate?) -> ESTabBarController? {
+        
         let tabBarController = ESTabBarController()
         tabBarController.delegate = delegate
         tabBarController.title = "Irregularity"
         tabBarController.tabBar.shadowImage = UIImage(named: "transparent")
         //        tabBarController.tabBar.backgroundImage = UIImage(named: "background_dark")
         //        tabBarController.tabBar.backgroundImage = NSObject.creatImageWithColor(color: UIColor.randomColor())
-        tabBarController.shouldHijackHandler = {
-            tabbarController, viewController, index in
-            if index == 2 {
-                return true
-            }
-            return false
-        }
-        tabBarController.didHijackHandler = {
-            [weak tabBarController] tabbarController, viewController, index in
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-                let takePhotoAction = UIAlertAction(title: "Take a photo", style: .default, handler: nil)
-                alertController.addAction(takePhotoAction)
-                let selectFromAlbumAction = UIAlertAction(title: "Select from album", style: .default, handler: nil)
-                alertController.addAction(selectFromAlbumAction)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alertController.addAction(cancelAction)
-                tabBarController?.present(alertController, animated: true, completion: nil)
-            }
-        }
         
         var vcArr:[UIViewController] = []
         
@@ -142,10 +158,39 @@ extension UITabBarController {
         vcArr.append(UINavigationController.init(rootViewController: v2))
         
         let v3 = UIViewController()
-        v3.tabBarItem = ESTabBarItem.init(EBasicContentView.init(irregularity: true, animEnable: true), title: nil, image: UIImage(named: "photo_verybig"), selectedImage: UIImage(named: "photo_verybig"))
+        let bigBarV = EBasicContentView.init(irregularity: true, animEnable: true)
+        v3.tabBarItem = ESTabBarItem.init(bigBarV, title: nil, image: UIImage(named: "photo_verybig"), selectedImage: UIImage(named: "photo_verybig"))
         vcArr.append(UINavigationController.init(rootViewController: v3))
         
-        let v4 = UIViewController()
+        tabBarController.shouldHijackHandler = {
+            tabbarController, viewController, index in
+            if index == 2 {
+                return true
+            }
+            return false
+        }
+        tabBarController.didHijackHandler = {
+            [weak tabBarController] tabbarController, viewController, index in
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                
+                let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+                let takePhotoAction = UIAlertAction(title: "Take a photo", style: .default, handler: nil)
+                alertController.addAction(takePhotoAction)
+                let selectFromAlbumAction = UIAlertAction(title: "Select from album", style: .default, handler: nil)
+                alertController.addAction(selectFromAlbumAction)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    alertController.popoverPresentationController?.sourceRect = bigBarV.bounds
+                    alertController.popoverPresentationController?.sourceView = bigBarV
+                }
+                tabBarController?.present(alertController, animated: true, completion: nil)
+                
+            }
+        }
+        
+        let v4 = UIStoryboard.stBdWithID(storyName: "Main", nameID: "otherV")
         v4.tabBarItem = ESTabBarItem.init(EBasicContentView(), title: "Favor", image: UIImage(named: "favor"), selectedImage: UIImage(named: "favor_1"))
         vcArr.append(UINavigationController.init(rootViewController: v4))
         
@@ -195,7 +240,7 @@ class EBasicContentView: ESTabBarItemContentView {
         self.imageView.layer.borderWidth = 3.0
         self.imageView.layer.borderColor = UIColor.init(white: 235 / 255.0, alpha: 1.0).cgColor
         self.imageView.layer.cornerRadius = 35
-        self.insets = UIEdgeInsets.init(top: -32, left: 0, bottom: 0, right: 0)
+        self.insets = UIEdgeInsets.init(top: -11, left: 0, bottom: 0, right: 0)
         let transform = CGAffineTransform.identity
         self.imageView.transform = transform
         self.superview?.bringSubviewToFront(self)

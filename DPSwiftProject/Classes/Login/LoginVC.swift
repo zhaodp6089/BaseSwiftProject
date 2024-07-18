@@ -65,7 +65,7 @@ class LoginVC: UIViewController {
 //                    
 //                }
                 
-                UIAlertController.alertMessage(style: .alert, title: "deviceTime", message:Defaults.timestamp ?? "", options: [], cancel: "ok")
+                UIAlertController.alertMessage(style: .alert, title: "deviceTime", message:Defaults.timestamp ?? "", options: [], cancel: "ok", targetVC: nil)
             case .failure(_):
                 
                 break
@@ -75,7 +75,8 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func loginAction(_ sender: UIButton) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_KEY), object: nil)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_KEY), object: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     fileprivate func showAlert(_ title: String, message: String) {

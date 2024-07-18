@@ -25,7 +25,8 @@ class MyProfile: UIViewController {
     }
     
     @IBAction func logOutAction(_ sender: UIButton) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGOUT_KEY), object: nil)
+        loginAction()
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGOUT_KEY), object: nil)
 //        if rotation {
 ////            portraitInterface()
 //            allowInterfaceOrientation(.portrait, allow: true)
@@ -34,6 +35,16 @@ class MyProfile: UIViewController {
 //            allowInterfaceOrientation(.landscapeRight, allow: true)
 //        }
 //        rotation = !rotation
+    }
+    
+    func loginAction() {
+        guard let loginVc = UIStoryboard.storyBdInitial("Login") else {
+            print("登录控制器获取失败！")
+            return
+        }
+        let navi = UINavigationController.init(rootViewController: loginVc)
+        loginVc.view.backgroundColor = UIColor.randomColor()
+        self.present(navi, animated: true, completion: nil)
     }
     
     deinit {
